@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base target="_top">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact Us — Bay City CAST</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.45;
+    color: #222;
+    background: #f7f1e3;
+  }
+  .wrap { max-width: 560px; margin: 0 auto; padding: 16px 16px 24px; }
+  .banner { width: 100%; border-radius: 8px; margin-bottom: 16px; display: block; }
+  h1 { font-family: Georgia, 'Times New Roman', serif; font-size: 22px; margin: 0 0 4px; color: #990000; }
+  .intro { margin: 0 0 16px; color: #444; }
+  .intro a { color: #990000; }
+  fieldset { border: 0; margin: 0 0 16px; padding: 0; }
+  legend { font-family: Georgia, 'Times New Roman', serif; font-weight: 700; font-size: 17px; padding: 0; margin-bottom: 8px; }
+  .hint { font-size: 14px; color: #555; margin: 0 0 8px; }
+  .helper { font-size: 13px; color: #555; margin: -6px 0 12px; }
+  label.field { display: block; margin-bottom: 12px; }
+  label.field span { display: block; font-family: Georgia, 'Times New Roman', serif; font-weight: 700; margin-bottom: 4px; }
+  label.field input, label.field textarea {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px 12px;
+    background: #fff;
+    border: 1px solid #c9bfa5;
+    border-radius: 6px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  label.field textarea { min-height: 90px; resize: vertical; }
+  label.field input:focus, label.field textarea:focus { outline: 2px solid #990000; outline-offset: 0; border-color: #990000; }
+  label.field.invalid input, label.field.invalid textarea { border-color: #990000; background: #fdf6f6; }
+  .choice {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 12px;
+    background: #fff;
+    border: 1px solid #d9cba8;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    cursor: pointer;
+  }
+  .choice input { width: 20px; height: 20px; flex: none; accent-color: #990000; }
+  .choice .cname { flex: 1; }
+  .choice:has(input:checked) { border-color: #990000; background: #fdf6f6; }
+  .choice.invalid { border-color: #990000; background: #fdf6f6; }
+  #other-wrap { display: none; margin: -2px 0 12px; }
+  #other-wrap.show { display: block; }
+  #other-wrap input {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px 12px;
+    background: #fff;
+    border: 1px solid #c9bfa5;
+    border-radius: 6px;
+  }
+  #other-wrap input:focus { outline: 2px solid #990000; outline-offset: 0; border-color: #990000; }
+  .action {
+    display: block;
+    width: 100%;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 13px;
+    border: 0;
+    border-radius: 6px;
+    background: #990000;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+  }
+  .action:disabled { opacity: 0.6; cursor: default; }
+  .action.secondary { background: #fff; color: #990000; border: 1px solid #990000; margin-top: 10px; }
+  .msg { margin-top: 14px; font-size: 15px; }
+  .msg.err { color: #990000; font-weight: 700; }
+  #confirm { min-height: 650px; display: flex; flex-direction: column; justify-content: center; }
+  #confirm h2 { font-family: Georgia, 'Times New Roman', serif; font-size: 24px; margin: 0 0 10px; color: #990000; }
+  #confirm p { margin: 0 0 8px; font-size: 17px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <img class="banner" src="https://drive.google.com/thumbnail?id=1wXwsRb8t6DBDrD8JAkJEZf05AHiSRetM&sz=w800" alt="CAST — Community Actors of South Texas">
+
+  <div id="form-view">
+    <h1>Contact Us</h1>
+    <p class="intro">Questions about a show, tickets, volunteering, or anything else CAST? Send us a message and we&rsquo;ll get back to you. You can also email us directly at <a href="mailto:info@baycitycast.com">info@baycitycast.com</a>.</p>
+
+    <form id="contact-form" novalidate>
+      <fieldset>
+        <legend>Your details</legend>
+        <label class="field" id="f-name">
+          <span>Your Name</span>
+          <input id="name" type="text" autocomplete="name" required>
+        </label>
+        <label class="field" id="f-email">
+          <span>Email Address</span>
+          <input id="email" type="email" autocomplete="email" inputmode="email" required>
+        </label>
+        <label class="field" id="f-phone">
+          <span>Cell Number</span>
+          <input id="phone" type="tel" autocomplete="tel" inputmode="tel" required>
+        </label>
+        <p class="helper">In case we need to reach you by text.</p>
+      </fieldset>
+
+      <fieldset>
+        <legend>CAST News</legend>
+        <p class="hint">Would you like to hear CAST news by email?</p>
+        <label class="choice" id="c-news-yes"><input type="radio" name="castnews" value="Yes"> <span class="cname">Yes</span></label>
+        <label class="choice" id="c-news-no"><input type="radio" name="castnews" value="No"> <span class="cname">No</span></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Interests</legend>
+        <p class="hint">What are you writing about? Pick all that apply.</p>
+        <label class="choice"><input type="checkbox" name="interest" value="Performing"> <span class="cname">Performing</span></label>
+        <label class="choice"><input type="checkbox" name="interest" value="Volunteering"> <span class="cname">Volunteering</span></label>
+        <label class="choice"><input type="checkbox" name="interest" value="Donating"> <span class="cname">Donating</span></label>
+        <label class="choice"><input type="checkbox" name="interest" value="Learning More"> <span class="cname">Learning More</span></label>
+        <label class="choice"><input type="checkbox" name="interest" value="Other" id="interest-other"> <span class="cname">Other</span></label>
+        <div id="other-wrap"><input id="interest-other-text" type="text" placeholder="Tell us what it's about"></div>
+      </fieldset>
+
+      <fieldset>
+        <label class="field">
+          <span>Comments</span>
+          <textarea id="comments" placeholder="Anything else you'd like us to know? (optional)"></textarea>
+        </label>
+      </fieldset>
+
+      <button class="action" type="submit" id="submit-btn">Send Message</button>
+      <p class="msg err" id="msg" role="status"></p>
+    </form>
+  </div>
+
+  <div id="confirm" style="display:none">
+    <h2>Thank you!</h2>
+    <p id="confirm-text">Your message is on its way. We&rsquo;ll get back to you as soon as we can.</p>
+    <p>Prefer email? Write to us any time at <a href="mailto:info@baycitycast.com">info@baycitycast.com</a>.</p>
+    <button class="action secondary" type="button" id="another-btn">Send another message</button>
+  </div>
+</div>
+
+<script>
+// Filled in at deploy time with the live Apps Script exec URL.
+// (Preview builds leave this as the placeholder — the submit handler
+// below shows the confirmation without sending anything.)
+var BACKEND_URL = 'https://script.google.com/macros/s/AKfycbwrnBdoFBCaIt5IBaUxIw8B2Yls4BE1XMd4gdqnZ94J89mh3-_4a8E5y_VXkhJ_tZcI/exec';
+
+var $ = function (id) { return document.getElementById(id); };
+
+function digitsOnly(s) { return (s || '').replace(/\D/g, ''); }
+function formatPhone(d) {
+  return '(' + d.slice(0, 3) + ') ' + d.slice(3, 6) + '-' + d.slice(6, 10);
+}
+
+function setInvalid(id, bad) {
+  $(id).classList.toggle('invalid', !!bad);
+  return !bad;
+}
+
+function callBackend(params) {
+  // Same pattern as the volunteer forms: plain fetch with no Google
+  // credentials (so multi-account phones don't break), JSONP fallback.
+  var qs = Object.keys(params).map(function (k) {
+    return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
+  }).join('&');
+  return fetch(BACKEND_URL + '?' + qs, { credentials: 'omit' })
+    .then(function (r) { return r.json(); })
+    .catch(function () {
+      return new Promise(function (resolve, reject) {
+        var cb = 'cu_cb_' + Math.floor(Math.random() * 1e9);
+        window[cb] = function (data) {
+          delete window[cb];
+          s.remove();
+          resolve(data);
+        };
+        var s = document.createElement('script');
+        s.onerror = function () { delete window[cb]; s.remove(); reject(new Error('backend unreachable')); };
+        s.src = BACKEND_URL + '?' + qs + '&callback=' + cb;
+        document.body.appendChild(s);
+      });
+    });
+}
+
+$('interest-other').addEventListener('change', function () {
+  $('other-wrap').classList.toggle('show', this.checked);
+  if (this.checked) $('interest-other-text').focus();
+});
+
+$('contact-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var msg = $('msg');
+  msg.textContent = '';
+
+  var name = $('name').value.trim();
+  var email = $('email').value.trim();
+  var phoneDigits = digitsOnly($('phone').value);
+  var news = (document.querySelector('input[name="castnews"]:checked') || {}).value || '';
+  var interests = Array.prototype.slice.call(document.querySelectorAll('input[name="interest"]:checked')).map(function (c) { return c.value; });
+  var otherText = $('interest-other-text').value.trim();
+
+  var ok = true;
+  ok = setInvalid('f-name', !name) && ok;
+  ok = setInvalid('f-email', !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) && ok;
+  ok = setInvalid('f-phone', phoneDigits.length !== 10) && ok;
+  var newsOk = !!news;
+  $('c-news-yes').classList.toggle('invalid', !newsOk);
+  $('c-news-no').classList.toggle('invalid', !newsOk);
+  ok = newsOk && ok;
+  var intOk = interests.length > 0 && (interests.indexOf('Other') === -1 || !!otherText);
+  document.querySelectorAll('input[name="interest"]').forEach(function (c) {
+    c.closest('.choice').classList.toggle('invalid', !intOk);
+  });
+  ok = intOk && ok;
+
+  if (!ok) {
+    msg.textContent = 'Please check the highlighted fields and try again.';
+    var bad = document.querySelector('.field.invalid input, .choice.invalid input');
+    if (bad) bad.focus();
+    return;
+  }
+
+  var interestList = interests.filter(function (v) { return v !== 'Other'; });
+  if (interests.indexOf('Other') !== -1) interestList.push(otherText);
+
+  var btn = $('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  msg.textContent = '';
+
+  callBackend({
+    action: 'submitContact',
+    name: name,
+    email: email,
+    phone: formatPhone(phoneDigits),
+    castNews: news,
+    interests: interestList.join(', '),
+    comments: $('comments').value.trim()
+  }).then(function (res) {
+    if (!res || !res.ok) throw new Error((res && res.error) || 'send failed');
+    $('confirm-text').textContent = 'Thanks, ' + name.split(' ')[0] + ' — your message is on its way. We\u2019ll get back to you as soon as we can.';
+    $('form-view').style.display = 'none';
+    $('confirm').style.display = 'flex';
+    window.scrollTo(0, 0);
+  }).catch(function () {
+    msg.textContent = 'Something went wrong sending your message. Please try again, or email us directly at info@baycitycast.com.';
+    btn.disabled = false;
+    btn.textContent = 'Send Message';
+  });
+});
+
+$('another-btn').addEventListener('click', function () {
+  $('contact-form').reset();
+  $('other-wrap').classList.remove('show');
+  $('submit-btn').disabled = false;
+  $('submit-btn').textContent = 'Send Message';
+  $('confirm').style.display = 'none';
+  $('form-view').style.display = 'block';
+  window.scrollTo(0, 0);
+});
+</script>
+</body>
+</html>
